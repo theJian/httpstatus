@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@cycle/dom": "^20.4.0",
-    "@cycle/rxjs-run": "^8.0.0",
+    "@cycle/rxjs-run": "^9.0.0",
     "awesome-typescript-loader": "3.2.3",
     "rxjs": "^6.2.0",
     "rxjs-compat": "^6.2.0",

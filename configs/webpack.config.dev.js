@@ -11,6 +11,7 @@ const paths = {
 }
 
 module.exports = {
+  mode: "development",
   entry: {
     main: [
       // Include an alternative client for WebpackDevServer. A client's job is to

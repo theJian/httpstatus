@@ -10,4 +10,5 @@ const drivers = {
   DOM: makeDOMDriver('#root')
 }
 
+// @ts-ignore
 run(main, drivers)

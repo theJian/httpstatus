@@ -1,13 +1,6 @@
-'use strict'
-
-// Silence webpack2 deprecation warnings
-// https://github.com/vuejs/vue-loader/issues/666
-process.noDeprecation = true
-
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const webpack = require('webpack')
-const { CheckerPlugin } = require('awesome-typescript-loader')
 
 // Paths to be used for webpack configuration
 const paths = {
@@ -51,45 +44,12 @@ module.exports = {
   module: {
     rules: [
       {
-        // We use babel-loader to transipile every .js or .jsx file
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        // Including over excluding as a whitelist is easier to maintain than a blacklist.
-        // as per http://stackoverflow.com/questions/31675025/how-to-exclude-nested-node-module-folders-from-a-loader-in-webpack
-        include: paths.appSrc,
-        options: {
-          // This is a feature of `babel-loader` for webpack (not Babel itself).
-          // It enables caching results in ./node_modules/.cache/babel-loader/
-          // directory for faster rebuilds.
-          cacheDirectory: true,
-          // Instead of relying on a babelrc file to configure babel (or in package.json configs)
-          // We speficy here which presets to use. In the future this could be moved to it's own
-          // package as create-react-app does with their 'babel-preset-react-app module
-          babelrc: false,
-          presets: [
-            [ 'env', {
-              'targets': {
-                'browsers': ['last 2 versions']
-              }
-            }]
-          ],
-          plugins: [
-            // https://cycle.js.org/getting-started.html#getting-started-coding-consider-jsx
-            // This allow us to use JSX to create virtual dom elements instead of Snabbdom helpers like div(), input(), ..
-            ['transform-react-jsx', { pragma: 'Snabbdom.createElement' }],
-            // Allow Babel to transform rest properties for object destructuring assignment and spread properties for object literals.
-            ['transform-object-rest-spread']
-          ]
-        }
-      },
-      {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
+        loader: 'ts-loader'
       }
     ]
   },
   plugins: [
-    new CheckerPlugin(),
     // This is necessary to emit hot updates (currently CSS only):
     new webpack.HotModuleReplacementPlugin(),
     // Generates an `index.html` file with the <script> injected.
@@ -103,10 +63,6 @@ module.exports = {
     new webpack.DefinePlugin({
       DEVELOPMENT: JSON.stringify(process.env.NODE_ENV === 'development')
     }),
-    // To be used for JSX support
-    new webpack.ProvidePlugin({
-      Snabbdom: 'snabbdom-pragma'
-    })
   ],
   devtool: 'inline-source-map'
 }

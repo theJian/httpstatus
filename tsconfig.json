@@ -8,7 +8,9 @@
     "sourceMap": true,
     "noImplicitReturns": true,
     "strict": true,
-    "allowJs": true,
+    "allowJs": false,
+    "diagnostics": true,
+    "noImplicitAny": true,
     "lib": ["ES6", "ES5", "DOM"]
   },
   "include": ["src/**/*"],

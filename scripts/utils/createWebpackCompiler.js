@@ -1,5 +1,3 @@
-'use strict'
-
 const chalk = require('chalk')
 const webpack = require('webpack')
 const clearConsole = require('react-dev-utils/clearConsole')
